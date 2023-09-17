@@ -1,9 +1,10 @@
-import { createNativeStackNavigator } from 'react-navigation/native-stack';
-import { NavigationContainer } from 'react-navigation/native';
-import Login from './src/components/Login';
-import Pokemon from './src/components/Pokemon';
-import Home from './src/components/Home';
 
+
+import Login from './src/components/Login';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './src/components/Home';
+import Pokemon from './src/components/Pokemon';
 
 const Stack = createNativeStackNavigator()
 
