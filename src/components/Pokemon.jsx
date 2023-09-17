@@ -6,29 +6,20 @@ const Pokemon = (navigation) => {
     const [pokemons, setPokemons] = useState([]);
     const [setPokemonData] = useState();
     const [currentPage, setCurrentPag] = useState(1)
-
-
-
-
-
     const Characterspage = 10
     const startIndex = (currentPage - 1) * Characterspage
     const endIndex = startIndex + Characterspage
-  
-  
-  
+    
     const handlePreviousPage = () => {
-      if (currentPage > 1) {
-        setCurrentPag(currentPage - 1)
-      }
+        if (currentPage > 1) {
+            setCurrentPag(currentPage - 1)
+        }
     }
-  
+
     const handleNextPage = () => {
-      
         setCurrentPag(currentPage + 1)
-      
-    }
-  
+     }
+
 
     const getPokemons = () => {
         var endpoints = [];
@@ -42,12 +33,12 @@ const Pokemon = (navigation) => {
     const pokemonPickHandler = (pokemonData) => {
         setPokemonData(pokemonData);
         navigation.navigate("Home", pokemonData);
-      }
+    }
 
 
     useEffect(() => {
         getPokemons()
-      }, [currentPage])
+    }, [currentPage])
 
     return (
         <SafeAreaView style={{ backgroundColor: '#000' }}>
@@ -77,9 +68,9 @@ const Pokemon = (navigation) => {
                     </View>
                 ))}
                 <View >
-           <Button  title='Proxima pagina' onPress={handleNextPage} />
-            <Button title='Pagina anterior' onPress={handlePreviousPage} />
-        </View>
+                    <Button title='Proxima pagina' onPress={handleNextPage} />
+                    <Button title='Pagina anterior' onPress={handlePreviousPage} />
+                </View>
             </ScrollView>
         </SafeAreaView>
 
@@ -87,35 +78,35 @@ const Pokemon = (navigation) => {
 }
 const styles = StyleSheet.create({
     container: {
-      flexDirection: "row",
-      backgroundColor: "#fff",
-      margin: 10,
-      borderRadius: 50,
-      shadowRadius: 5,
-      shadowOpacity: 0.6,
-      shadowColor: '#f00'
+        flexDirection: "row",
+        backgroundColor: "#fff",
+        margin: 10,
+        borderRadius: 50,
+        shadowRadius: 5,
+        shadowOpacity: 0.6,
+        shadowColor: '#f00'
     },
     containerImage: {
-      height: 100,
-      width: 100
+        height: 100,
+        width: 100
     },
     Image: {
-      height: 100,
-      width: 100,
+        height: 100,
+        width: 100,
     },
     textContainer: {
-      height: 100,
-      width: 150,
-      paddingLeft: 20,
-      paddingTop: 10,
-  
+        height: 100,
+        width: 150,
+        paddingLeft: 20,
+        paddingTop: 10,
+
     },
     Text: {
-      fontWeight: 'bold',
-      marginVertical: 12,
-  
+        fontWeight: 'bold',
+        marginVertical: 12,
+
     },
-   
-  });
+
+});
 
 export default Pokemon;
