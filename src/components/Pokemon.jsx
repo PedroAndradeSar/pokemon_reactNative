@@ -2,9 +2,33 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, SafeAreaView, Button, } from "react-native";
 import axios from "axios";
 
-const Pokemon = () => {
+const Pokemon = (navigation) => {
     const [pokemons, setPokemons] = useState([]);
     const [setPokemonData] = useState();
+    const [currentPage, setCurrentPag] = useState(1)
+
+
+
+
+
+    const Characterspage = 10
+    const startIndex = (currentPage - 1) * Characterspage
+    const endIndex = startIndex + Characterspage
+  
+  
+  
+    const handlePreviousPage = () => {
+      if (currentPage > 1) {
+        setCurrentPag(currentPage - 1)
+      }
+    }
+  
+    const handleNextPage = () => {
+      
+        setCurrentPag(currentPage + 1)
+      
+    }
+  
 
     const getPokemons = () => {
         var endpoints = [];
@@ -15,10 +39,15 @@ const Pokemon = () => {
             .all(endpoints.map((endpoint) => axios.get(endpoint)))
             .then((res) => setPokemons(res));
     }
+    const pokemonPickHandler = (pokemonData) => {
+        setPokemonData(pokemonData);
+        navigation.navigate("Home", pokemonData);
+      }
+
 
     useEffect(() => {
         getPokemons()
-    }, [])
+      }, [currentPage])
 
     return (
         <SafeAreaView style={{ backgroundColor: '#000' }}>
@@ -47,6 +76,10 @@ const Pokemon = () => {
                         </TouchableOpacity>
                     </View>
                 ))}
+                <View >
+           <Button  title='Proxima pagina' onPress={handleNextPage} />
+            <Button title='Pagina anterior' onPress={handlePreviousPage} />
+        </View>
             </ScrollView>
         </SafeAreaView>
 
