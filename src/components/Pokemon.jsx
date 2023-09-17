@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, SafeAreaView, Button, } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, SafeAreaView, Button } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
-const Pokemon = (navigation) => {
+const Pokemon = () => {
     const [pokemons, setPokemons] = useState([]);
-    const [setPokemonData] = useState();
-    const [currentPage, setCurrentPag] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1)
     const Characterspage = 10
     const startIndex = (currentPage - 1) * Characterspage
     const endIndex = startIndex + Characterspage
-    
+
+    const navigation = useNavigation();
+
     const handlePreviousPage = () => {
         if (currentPage > 1) {
-            setCurrentPag(currentPage - 1)
+            setCurrentPage(currentPage - 1)
         }
     }
 
     const handleNextPage = () => {
-        setCurrentPag(currentPage + 1)
-     }
-
+        setCurrentPage(currentPage + 1)
+    }
 
     const getPokemons = () => {
         var endpoints = [];
@@ -28,13 +29,12 @@ const Pokemon = (navigation) => {
         }
         axios
             .all(endpoints.map((endpoint) => axios.get(endpoint)))
-            .then((res) => setPokemons(res));
-    }
-    const pokemonPickHandler = (pokemonData) => {
-        setPokemonData(pokemonData);
-        navigation.navigate("Home", pokemonData);
+            .then((res) => setPokemons(res.map((r) => r.data)));
     }
 
+    const pokemonPickHandler = (pokemonData) => {
+        navigation.navigate("Home", { pokemonData }); // Passa os dados do Pokémon como parâmetro
+    }
 
     useEffect(() => {
         getPokemons()
@@ -45,20 +45,19 @@ const Pokemon = (navigation) => {
             <ScrollView>
                 {pokemons.map((pokemon, key) => (
                     <View key={key}>
-                        <TouchableOpacity onPress={() => pokemonPickHandler(pokemon.data)}>
+                        <TouchableOpacity onPress={() => pokemonPickHandler(pokemon)}>
                             <View style={styles.container}>
                                 <View style={styles.containerImage}>
                                     <Image
                                         style={styles.Image}
-                                        source={{ uri: pokemon.data.sprites.front_default }}
+                                        source={{ uri: pokemon.sprites.front_default }}
                                     />
                                 </View>
                                 <View style={styles.textContainer}>
-
-                                    <Text style={styles.Text}>Name:{pokemon.data.name} </Text>
+                                    <Text style={styles.Text}>Name:{pokemon.name} </Text>
                                     <Text style={styles.Text}>
                                         Type:
-                                        {pokemon.data.types.map((type, key) => (
+                                        {pokemon.types.map((type, key) => (
                                             <Text key={key}> {type.type.name} </Text>
                                         ))}
                                     </Text>
@@ -73,9 +72,9 @@ const Pokemon = (navigation) => {
                 </View>
             </ScrollView>
         </SafeAreaView>
-
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
