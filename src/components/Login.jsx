@@ -1,22 +1,16 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-=======
 import React, { useState } from "react";
->>>>>>> 2b30c4c (task-005)
 import { Image, StyleSheet, View } from "react-native";
 import { TextInput } from "react-native";
 import MyButton from "./MyButton";
 
 const usuariosEstaticos = {
-    email: 'phandradesar@gmail.com',
-    senha: '123123',
+{    email: 'phandradesar@gmail.com',
+    senha: '123123',},
+    {    email: 'phandradesar@gmail.com',
+    senha: '123123',}
 };
 
-<<<<<<< HEAD
-const Login = () => {
-=======
 const Login = ({ navigation }) => {
->>>>>>> 2b30c4c (task-005)
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
@@ -32,11 +26,7 @@ const Login = ({ navigation }) => {
             <View style={styles.Input}>
                 <TextInput
                     placeholderTextColor='red'
-<<<<<<< HEAD
-                    placeholder={"Email"}
-=======
                     placeholder={"Email (mínimo de 5 caracteres)"}
->>>>>>> 2b30c4c (task-005)
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                 />
@@ -57,13 +47,10 @@ export default Login;
 
 const styles = StyleSheet.create({
     container: {
-<<<<<<< HEAD
-=======
         alignItems: "center",
         justifyContent: "center",
         flex: 1,
         backgroundColor: '#e8d209',
->>>>>>> 2b30c4c (task-005)
     },
     textImput: {
     },
