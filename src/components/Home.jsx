@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   image: {
-    width: 250,
-    height: 250,
+    width: 350,
+    height: 350,
   },
   infoBox: {
-    backgroundColor: "#f23af0",
-    borderRadius: 10,
+    backgroundColor: "#a6ada7",
+    borderRadius: 20,
     padding: 20,
     marginTop: 20,
     width: "100%", 

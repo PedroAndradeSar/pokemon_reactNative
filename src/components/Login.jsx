@@ -19,23 +19,21 @@ const Login = ({ navigation }) => {
 
     const validateEmail = (text) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailPattern.test(text) && text.length >= 5; // Mínimo de 5 caracteres para o email
+        return emailPattern.test(text) && text.length >= 5;
     };
 
     const handleLogin = () => {
         if (isValidEmail && senha.length >= 6) {
             if (email === usuariosEstaticos.email && senha === usuariosEstaticos.senha) {
-                // Login bem-sucedido, navegue para a página 'Home'
+        
                 navigation.navigate('Pokemon');
 
                 setEmail('');
                 setSenha('');
             } else {
-                // Exiba uma mensagem de erro, pois os dados estão incorretos
                 alert('Email ou senha incorretos');
             }
         } else {
-            // Exiba uma mensagem de erro se os campos não atenderem aos critérios
             alert('Email ou senha incorretos');
         }
     };
@@ -52,22 +50,20 @@ const Login = ({ navigation }) => {
 
             <View style={styles.Input}>
                 <TextInput
-                    placeholderTextColor='red'
                     style={[
                         styles.textImput,
                         email.length >= 5 && !isValidEmail ? { borderColor: 'red' } : null,
                     ]}
-                    placeholder={"Email (mínimo de 5 caracteres)"}
+                    placeholder={"Informe o Email"}
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                 />
                 <TextInput
-                    placeholderTextColor='red'
                     style={[
                         styles.textImput,
                         senha.length < 6 ? { borderColor: 'red' } : null,
                     ]}
-                    placeholder={"Senha (mínimo de 6 caracteres)"}
+                    placeholder={"Informe a senha "}
                     secureTextEntry={true}
                     onChangeText={(text) => setSenha(text)}
                     value={senha}
