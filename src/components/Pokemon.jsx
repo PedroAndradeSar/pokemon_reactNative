@@ -33,7 +33,7 @@ const Pokemon = () => {
     }
 
     const pokemonPickHandler = (pokemonData) => {
-        navigation.navigate("Home", { pokemonData }); // Passa os dados do Pokémon como parâmetro
+        navigation.navigate("Home", { pokemonData });
     }
 
     useEffect(() => {
