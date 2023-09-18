@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
     height: 250,
   },
   infoBox: {
-    backgroundColor: "#f23af0", // Cor de fundo da caixa
+    backgroundColor: "#f23af0",
     borderRadius: 10,
     padding: 20,
     marginTop: 20,
-    width: "100%", // Largura total
+    width: "100%", 
   },
   infoRow: {
     flexDirection: "row",
