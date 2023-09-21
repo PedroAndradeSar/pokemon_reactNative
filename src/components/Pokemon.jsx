@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, SafeAreaView, Button } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import Contato from "./Contato"
 
 const Pokemon = () => {
     const [pokemons, setPokemons] = useState([]);
