@@ -51,9 +51,13 @@ const Pokemon = () => {
 
     return (
         <SafeAreaView style={{ backgroundColor: '#000' }}>
-            <View style={styles.header}>
-                <Button title='Contato' onPress={handleContatoPress} />
-                <Button title='Quem Somos' onPress={handleQuemSomosPress} />
+             <View style={styles.header}>
+                <TouchableOpacity onPress={handleContatoPress} style={styles.headerButton}>
+                    <Text style={styles.headerButtonText}>Contato</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleQuemSomosPress} style={styles.headerButton}>
+                    <Text style={styles.headerButtonText}>Quem Somos</Text>
+                </TouchableOpacity>
             </View>
             <ScrollView>
                 {pokemons.map((pokemon, key) => (
@@ -91,9 +95,18 @@ const Pokemon = () => {
 const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: "#fff",
+        justifyContent: "space-around",
+        alignItems: "center",
+        backgroundColor: '#ddd',
         padding: 10,
+    },
+    headerButton: {
+        backgroundColor: 'transparent',
+        borderRadius: 0,
+    },
+    headerButtonText: {
+        color: 'black', 
+        fontWeight: 'bold',
     },
 
     container: {
