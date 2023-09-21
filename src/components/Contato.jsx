@@ -7,6 +7,7 @@ const Contato = () => {
   const [mensagem, setMensagem] = useState("");
 
   const handleSubmit = () => {
+
     if (mensagem.length < 10 || mensagem.length > 200) {
       Alert.alert(
         "Erro",
@@ -15,17 +16,17 @@ const Contato = () => {
       );
       return;
     }
+
     const dados = {
       Nome: nome,
       Email: email,
       Mensagem: mensagem,
     };
 
-
     Alert.alert("Mensagem Enviada", JSON.stringify(dados), [
       { text: "OK", onPress: () => console.log("Alerta fechado") },
     ]);
-    
+
     setNome("");
     setEmail("");
     setMensagem("");
@@ -55,7 +56,7 @@ const Contato = () => {
           onChangeText={(text) => setMensagem(text)}
           multiline
           minLength={10} 
-          maxLength={200}
+          maxLength={200} 
         />
         <Button title="Enviar" onPress={handleSubmit} />
       </View>
@@ -69,10 +70,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10, 
-    margin: 16,
   },
   formContainer: {
     width: "100%",
@@ -81,14 +78,15 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 16,
+    marginBottom: 8,
+    marginTop: 8,
   },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
     padding: 8,
-    marginBottom: 12,
+    marginBottom: 8,
   },
   mensagemInput: {
     height: 150,
