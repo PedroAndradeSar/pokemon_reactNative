@@ -95,8 +95,6 @@ const Pokemon = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-
-
         </SafeAreaView>
     );
 }
