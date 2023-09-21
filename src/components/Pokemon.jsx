@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, SafeAreaView, Button } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import Contato from "./Contato"
 
 const Pokemon = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -22,6 +23,15 @@ const Pokemon = () => {
         setCurrentPage(currentPage + 1)
     }
 
+    const handleContatoPress = () => {
+        navigation.navigate("Contato");
+    }
+
+    const handleQuemSomosPress = () => {
+        navigation.navigate("Quem Somos");
+    }
+
+
     const getPokemons = () => {
         var endpoints = [];
         for (var i = startIndex + 1; i <= endIndex; i++) {
@@ -41,7 +51,15 @@ const Pokemon = () => {
     }, [currentPage])
 
     return (
-        <SafeAreaView style={{ backgroundColor: '#000' }}>
+        <SafeAreaView style={{ backgroundColor: '#000', flex: 1 }}>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={handleContatoPress} style={styles.headerButton}>
+                    <Text style={styles.headerButtonText}>Contato</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleQuemSomosPress} style={styles.headerButton}>
+                    <Text style={styles.headerButtonText}>Quem Somos</Text>
+                </TouchableOpacity>
+            </View>
             <ScrollView>
                 {pokemons.map((pokemon, key) => (
                     <View key={key}>
@@ -66,16 +84,38 @@ const Pokemon = () => {
                         </TouchableOpacity>
                     </View>
                 ))}
-                <View >
-                    <Button title='Proxima pagina' onPress={handleNextPage} />
-                    <Button title='Pagina anterior' onPress={handlePreviousPage} />
-                </View>
             </ScrollView>
+            <View style={styles.footer}>
+                <View style={styles.paginationContainer}>
+                    <TouchableOpacity onPress={handlePreviousPage} style={[styles.paginationButton, { flex: 1 }]}>
+                        <Text style={styles.paginationButtonText}>Página anterior</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleNextPage} style={[styles.paginationButton, { flex: 1 }]}>
+                        <Text style={styles.paginationButtonText}>Próxima página</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+        backgroundColor: '#ddd',
+        padding: 10,
+    },
+    headerButton: {
+        backgroundColor: 'transparent',
+        borderRadius: 0,
+    },
+    headerButtonText: {
+        color: 'black',
+        fontWeight: 'bold',
+    },
+
     container: {
         flexDirection: "row",
         backgroundColor: "#fff",
@@ -106,6 +146,23 @@ const styles = StyleSheet.create({
 
     },
 
+    paginationContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    paginationButton: {
+        backgroundColor: '#ddd',
+        borderRadius: 0,
+        padding: 10,
+        marginHorizontal: 0,
+    },
+
+    paginationButtonText: {
+        color: 'black',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
 });
 
 export default Pokemon;
