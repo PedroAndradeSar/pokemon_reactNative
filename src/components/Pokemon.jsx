@@ -22,6 +22,15 @@ const Pokemon = () => {
         setCurrentPage(currentPage + 1)
     }
 
+    const handleContatoPress = () => {
+        navigation.navigate("Contato");
+    }
+
+    const handleQuemSomosPress = () => {
+        navigation.navigate("QuemSomos");
+    }
+
+
     const getPokemons = () => {
         var endpoints = [];
         for (var i = startIndex + 1; i <= endIndex; i++) {
@@ -42,6 +51,10 @@ const Pokemon = () => {
 
     return (
         <SafeAreaView style={{ backgroundColor: '#000' }}>
+            <View style={styles.header}>
+                <Button title='Contato' onPress={handleContatoPress} />
+                <Button title='Quem Somos' onPress={handleQuemSomosPress} />
+            </View>
             <ScrollView>
                 {pokemons.map((pokemon, key) => (
                     <View key={key}>
@@ -76,6 +89,13 @@ const Pokemon = () => {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: "#fff",
+        padding: 10,
+    },
+
     container: {
         flexDirection: "row",
         backgroundColor: "#fff",
