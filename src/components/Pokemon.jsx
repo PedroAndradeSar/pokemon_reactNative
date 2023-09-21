@@ -28,7 +28,7 @@ const Pokemon = () => {
     }
 
     const handleQuemSomosPress = () => {
-        navigation.navigate("QuemSomos");
+        navigation.navigate("Quem Somos");
     }
 
 
