@@ -51,8 +51,8 @@ const Pokemon = () => {
     }, [currentPage])
 
     return (
-        <SafeAreaView style={{ backgroundColor: '#000' }}>
-             <View style={styles.header}>
+        <SafeAreaView style={{ backgroundColor: '#000', flex: 1 }}>
+            <View style={styles.header}>
                 <TouchableOpacity onPress={handleContatoPress} style={styles.headerButton}>
                     <Text style={styles.headerButtonText}>Contato</Text>
                 </TouchableOpacity>
@@ -84,11 +84,19 @@ const Pokemon = () => {
                         </TouchableOpacity>
                     </View>
                 ))}
-                <View >
-                    <Button title='Proxima pagina' onPress={handleNextPage} />
-                    <Button title='Pagina anterior' onPress={handlePreviousPage} />
-                </View>
             </ScrollView>
+            <View style={styles.footer}>
+                <View style={styles.paginationContainer}>
+                    <TouchableOpacity onPress={handlePreviousPage} style={[styles.paginationButton, { flex: 1 }]}>
+                        <Text style={styles.paginationButtonText}>Página anterior</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleNextPage} style={[styles.paginationButton, { flex: 1 }]}>
+                        <Text style={styles.paginationButtonText}>Próxima página</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+
         </SafeAreaView>
     );
 }
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
     },
     headerButtonText: {
-        color: 'black', 
+        color: 'black',
         fontWeight: 'bold',
     },
 
@@ -140,6 +148,23 @@ const styles = StyleSheet.create({
 
     },
 
+    paginationContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    paginationButton: {
+        backgroundColor: '#ddd',
+        borderRadius: 0,
+        padding: 10,
+        marginHorizontal: 0,
+    },
+
+    paginationButtonText: {
+        color: 'black',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
 });
 
 export default Pokemon;
