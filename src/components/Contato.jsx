@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
 
 const Contato = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [mensagem, setMensagem] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
+
+  useEffect(() => {
+    setIsValidEmail(validateEmail(email));
+  }, [email]);
+
+  const validateEmail = (text) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(text) && text.length >= 5;
+  };
 
   const handleSubmit = () => {
-
     if (mensagem.length < 10 || mensagem.length > 200) {
       Alert.alert(
         "Erro",
@@ -17,13 +26,16 @@ const Contato = () => {
       return;
     }
 
-    const dados = {
-      Nome: nome,
-      Email: email,
-      Mensagem: mensagem,
-    };
+    if (nome === "" || email === "" || mensagem === "" || !isValidEmail) {
+      Alert.alert(
+        "Erro",
+        "Preencha todos os campos corretamente antes de enviar.",
+        [{ text: "OK", onPress: () => console.log("Alerta fechado") }]
+      );
+      return;
+    }
 
-    Alert.alert("Mensagem Enviada", JSON.stringify(dados), [
+    Alert.alert("Mensagem Enviada", "Sua mensagem foi enviada com sucesso!", [
       { text: "OK", onPress: () => console.log("Alerta fechado") },
     ]);
 
@@ -43,11 +55,13 @@ const Contato = () => {
           onChangeText={(text) => setNome(text)}
         />
         <TextInput
-          style={styles.input}
-          placeholder="E-mail"
-          value={email}
+          style={[
+            styles.input,
+            email.length >= 5 && !isValidEmail ? { borderColor: "red" } : null,
+          ]}
+          placeholder={"Informe o Email"}
           onChangeText={(text) => setEmail(text)}
-          keyboardType="email-address"
+          value={email}
         />
         <TextInput
           style={[styles.input, styles.mensagemInput]}
@@ -58,7 +72,11 @@ const Contato = () => {
           minLength={10} 
           maxLength={200} 
         />
-        <Button title="Enviar" onPress={handleSubmit} />
+        <Button
+          title="Enviar"
+          onPress={handleSubmit}
+          disabled={!isValidEmail || nome === "" || mensagem === ""}
+        />
       </View>
     </View>
   );
@@ -67,8 +85,8 @@ const Contato = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "center", 
+    alignItems: "center", 
     backgroundColor: "#fff",
   },
   formContainer: {
