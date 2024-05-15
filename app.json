@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pokemon_reactNative",
-    "slug": "pokemon_reactNative",
+    "name": "pethistory",
+    "slug": "pethistory",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
